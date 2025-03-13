@@ -6,9 +6,11 @@ RUN git clone https://github.com/FernandoEwald2/WhatsAppBot.git
 
 WORKDIR /app/WhatsAppBot
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=false
 
+# Instala o Chromium e dependências
 RUN apt-get update && apt-get install -y \
+    chromium \
     libnss3 \
     libatk-bridge2.0-0 \
     libatk1.0-0 \
@@ -30,11 +32,14 @@ RUN apt-get update && apt-get install -y \
     fonts-liberation \
     libu2f-udev \
     libjpeg62-turbo \
-    libvpx6 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN npm install
 
 RUN npm install puppeteer@latest --save
 
+# Configura o caminho do Chromium para o Puppeteer
+ENV CHROME_BIN=/usr/bin/chromium
+
 CMD ["node", "index.js"]
+

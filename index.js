@@ -8,7 +8,16 @@ const secretPass = "postgres";
 console.log(`A chave secreta é: ${secretKey}`);
 
 
-// Configura a conexão com o banco de dados
+// Configura a conexão com o banco de local
+// const dbClient = new Client({
+//   user: secretKey,
+//   host: "localhost",
+//   database: "whatsApp_Bot",
+//   password: secretPass,
+//   port: 5432, // Porta padrão do PostgreSQL
+// });
+
+// Configura a conexão com o banco de local
 const dbClient = new Client({
   user: secretKey,
   host: "postgres",
@@ -54,7 +63,7 @@ function start(client) {
         if (res.rows.length === 0) {
           // Inserir novo contato
           const insertContatoRes = await dbClient.query(
-            "INSERT INTO contatos (id, nome, numero) VALUES (uuid_generate_v4(), $1, $2) RETURNING id",
+            "INSERT INTO contatos (id, nome, numero) VALUES (gen_random_uuid(), $1, $2) RETURNING id",
             [escapeString(nomeContato), numeroContato]
           );
           contatoId = insertContatoRes.rows[0].id;
@@ -64,7 +73,7 @@ function start(client) {
 
         // Inserir mensagem recebida no banco
         await dbClient.query(
-          "INSERT INTO mensagens (id, mensagem, data_hora, contato_id, finalizado) VALUES (uuid_generate_v4(), $1, NOW(), $2, false)",
+          "INSERT INTO mensagens (id, mensagem, data_hora, contato_id) VALUES (gen_random_uuid(), $1, NOW(), $2)",
           [escapeString(message.body), contatoId]
         );
 
