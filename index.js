@@ -11,7 +11,7 @@ console.log(`A chave secreta é: ${secretKey}`);
 // Configura a conexão com o banco de dados
 const dbClient = new Client({
   user: secretKey,
-  host: "localhost",
+  host: "postgres",
   database: "whatsApp_Bot",
   password: secretPass,
   port: 5432, // Porta padrão do PostgreSQL
