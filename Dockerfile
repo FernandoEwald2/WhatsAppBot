@@ -1,6 +1,4 @@
-FROM node:14-bullseye
-
-RUN apt-get update && apt-get install -y git wget curl libnss3 libatk1.0-0 libatk-bridge2.0-0 libx11-xcb1 libgbm1
+FROM node:16.20.2
 
 WORKDIR /app
 
