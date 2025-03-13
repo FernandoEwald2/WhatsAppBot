@@ -17,4 +17,4 @@ WORKDIR /app/WhatsAppBot
 RUN npm install
 
 # Iniciar a aplicação
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
