@@ -14,7 +14,7 @@ const dbClient = new Client({
   host: "localhost",
   database: "whatsApp_Bot",
   password: secretPass,
-  port: 1980, // Porta padrão do PostgreSQL
+  port: 5432, // Porta padrão do PostgreSQL
 });
 
 dbClient.connect()
