@@ -3,8 +3,8 @@ const { Client } = require("pg");
 require('dotenv').config();
 
 //Crie variaveis de ambiente para que as chaves de acesso ao banco não fiquem expostas no seu código
-const secretKey = process.env.SECRET_KEY;
-const secretPass = process.env.SECRET_PASS;
+const secretKey = "postgres";
+const secretPass = "postgres";
 console.log(`A chave secreta é: ${secretKey}`);
 
 
@@ -14,7 +14,7 @@ const dbClient = new Client({
   host: "localhost",
   database: "whatsApp_Bot",
   password: secretPass,
-  port: 5432, // Porta padrão do PostgreSQL
+  port: 1980, // Porta padrão do PostgreSQL
 });
 
 dbClient.connect()
