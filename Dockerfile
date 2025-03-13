@@ -1,20 +1,15 @@
-# Usar uma imagem base do Node.js
-FROM node:18
+FROM node:14-bullseye
 
-# Instalar o Git
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git wget curl libnss3 libatk1.0-0 libatk-bridge2.0-0 libx11-xcb1 libgbm1
 
-# Definir o diretório de trabalho
 WORKDIR /app
 
-# Clonar o repositório do GitHub
 RUN git clone https://github.com/FernandoEwald2/WhatsAppBot.git
 
-# Mudar para o diretório do repositório
 WORKDIR /app/WhatsAppBot
 
-# Instalar dependências
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 RUN npm install
 
-# Iniciar a aplicação
 CMD ["node", "index.js"]
