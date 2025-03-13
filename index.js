@@ -9,22 +9,22 @@ console.log(`A chave secreta é: ${secretKey}`);
 
 
 // Configura a conexão com o banco de local
-// const dbClient = new Client({
-//   user: secretKey,
-//   host: "localhost",
-//   database: "whatsApp_Bot",
-//   password: secretPass,
-//   port: 5432, // Porta padrão do PostgreSQL
-// });
-
-// Configura a conexão com o banco de local
 const dbClient = new Client({
   user: secretKey,
-  host: "postgres",
+  host: "172.17.0.2",
   database: "whatsApp_Bot",
   password: secretPass,
   port: 5432, // Porta padrão do PostgreSQL
 });
+
+// Configura a conexão com o banco de local
+// const dbClient = new Client({
+//   user: secretKey,
+//   host: "postgres",
+//   database: "whatsApp_Bot",
+//   password: secretPass,
+//   port: 5432, // Porta padrão do PostgreSQL
+// });
 
 dbClient.connect()
   .then(() => console.log("Conectado ao banco de dados"))
@@ -39,8 +39,11 @@ venom
   .then((client) => start(client));
 
 function start(client) {
+  
   client.onMessage(async (message) => {
     if (message.body !== undefined) {
+      console.log(client)
+      console.log(message)
       console.log("Mensagem recebida:", message.body);
       console.log(secretKey, secretPass);
 
@@ -48,7 +51,7 @@ function start(client) {
         message.sender.pushname ||
         message.sender.verifiedName ||
         "Contato desconhecido";
-      const numeroContato = message.from;
+      const numeroContato = message.from;     
 
       console.log(`Mensagem recebida de: ${nomeContato}`);
 
